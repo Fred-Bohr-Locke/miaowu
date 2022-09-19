@@ -5,7 +5,7 @@
     </el-header>
     <el-container>
       <el-main>
-        <h1>test</h1>
+        <BlogEntry v-for="item in blogList" :title="item.title" :summary="item.summary" :author="item.author" />
       </el-main>
       <el-aside class="aside-container">
         <Carousel />
@@ -14,9 +14,21 @@
   </el-container>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import Header from './components/Header.vue'
 import Carousel from './components/Carousel.vue'
+import BlogEntry from './components/BlogEntry.vue'
+
+import { ref } from 'vue'
+import { getList } from '@/api/blog'
+
+const blogList = ref([])
+
+const initBlogList = async () => {
+  const response = await getList(1,5)
+  blogList.value = response.data.data.records
+}
+initBlogList()
 </script>
 
 <style scoped>
@@ -32,8 +44,8 @@ import Carousel from './components/Carousel.vue'
 }
 
 .aside-container {
-  width: 270px;
-  margin: 20px;
+  width: 265px;
+  padding: 20px;
 }
 
 </style>
