@@ -11,12 +11,10 @@ import com.miaowu.service.BlogService;
 import com.miaowu.vo.BlogVO;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-
 @Service
 public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements BlogService {
 
-    public IPage<Blog> searchBlog(BlogVO blogVO){
+    public IPage<Blog> searchBlog(BlogVO blogVO) {
         // 设置Page
         int currentPage = blogVO.getPage();
         int size = blogVO.getSize();
@@ -29,7 +27,12 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements Bl
         queryWrapper.select("id", "title", "summary", "author", "create_time");
 
         // 设置条件
+        Boolean author = blogVO.getAuthor();
         String title = blogVO.getTitle();
+
+        if (author != null) {
+            queryWrapper.eq("author", author);
+        }
 
         if (!StringUtils.isEmpty(title)) {
             queryWrapper.like("title", title);
