@@ -4,18 +4,19 @@
       <Header />
     </el-header>
     <el-container>
-      <el-aside class="aside-container">
-        <h1>sidebar</h1>
-      </el-aside>
       <el-main>
         <h1>test</h1>
       </el-main>
+      <el-aside class="aside-container">
+        <Carousel />
+      </el-aside>
     </el-container>
   </el-container>
 </template>
 
 <script setup>
 import Header from './components/Header.vue'
+import Carousel from './components/Carousel.vue'
 </script>
 
 <style scoped>
@@ -31,7 +32,8 @@ import Header from './components/Header.vue'
 }
 
 .aside-container {
-  width: 200px;
+  width: 270px;
+  margin: 20px;
 }
 
 </style>
